@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternHub - Job Matching for Students</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            background: white;
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        h2 {
+            color: #333;
+            font-size: 24px;
+        }
+        select, textarea, button {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            border: none;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .job-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .job-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .job-card:hover {
+            transform: scale(1.02);
+        }
+        .job-logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+        .job-info {
+            flex-grow: 1;
+        }
+        .job-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .job-match {
+            color: #28a745;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>InternHub - Job Matching for Students</h2>
+
+        <!-- Career Interest Survey -->
+        <label>Select Your Career Interest:</label>
+        <select id="careerInterest">
+            <option value="Technology">Technology</option>
+            <option value="Finance">Finance</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Design">Design</option>
+        </select>
+
+        <!-- Resume Upload -->
+        <label>Paste Your Resume:</label>
+        <textarea id="resumeInput" placeholder="Paste your resume text here..."></textarea>
+
+        <!-- Submit Button -->
+        <button onclick="processInternHub()">Submit & Get Job Matches</button>
+
+        <!-- Results Display -->
+        <div class="result" id="output"></div>
+
+        <!-- Job Listings -->
+        <div class="job-list" id="jobList"></div>
+    </div>
+
+    <script>
+        function processInternHub() {
+            let careerChoice = document.getElementById("careerInterest").value;
+            let resumeText = document.getElementById("resumeInput").value;
+
+            // Simulated job matches
+            let jobMatches = [];
+            if (careerChoice === "Technology") {
+                jobMatches = [
+                    {title: "Software Engineer Intern", company: "TechCorp", match: 92},
+                    {title: "Data Analyst Intern", company: "DataPros", match: 85}
+                ];
+            } else if (careerChoice === "Finance") {
+                jobMatches = [
+                    {title: "Investment Analyst Intern", company: "FinTrust", match: 88},
+                    {title: "Financial Planner Intern", company: "WealthPlus", match: 80}
+                ];
+            } else if (careerChoice === "Marketing") {
+                jobMatches = [
+                    {title: "Digital Marketing Intern", company: "AdGenius", match: 90},
+                    {title: "SEO Specialist Intern", company: "RankUp", match: 84}
+                ];
+            } else if (careerChoice === "Design") {
+                jobMatches = [
+                    {title: "UI/UX Designer Intern", company: "CreativeLabs", match: 91},
+                    {title: "Graphic Design Intern", company: "DesignPro", match: 83}
+                ];
+            }
+
+            // Display Results
+            let outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = `<p><strong>Suggested Career Path:</strong> ${careerChoice}</p>`;
+            outputDiv.innerHTML += `<p><strong>Extracted Skills:</strong> ${resumeText ? "AI Analyzed Skills Found" : "No Resume Provided"}</p>`;
+
+            // Display Job Matches
+            let jobListDiv = document.getElementById("jobList");
+            jobListDiv.innerHTML = "";
+            jobMatches.forEach(job => {
+                jobListDiv.innerHTML += `
+                    <div class="job-card">
+                        <div class="job-logo">${job.company.charAt(0)}</div>
+                        <div class="job-info">
+                            <p class="job-title">${job.title} - <span class="job-match">${job.match}% Match</span></p>
+                            <p>${job.company}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    </script>
+
+</body>
+</html>
